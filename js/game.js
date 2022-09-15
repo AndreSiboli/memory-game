@@ -33,6 +33,7 @@ const createCard = (character)=> {
 //Game 
 let firstCard = '';
 let secondCard = '';
+const windowContainer = document.querySelector('.window-container')
 
 const checkEndGame = () =>{
     const disabledCard = document.querySelectorAll('.disabled-card');
@@ -40,8 +41,7 @@ const checkEndGame = () =>{
        setTimeout(()=>{
         clearInterval(countdownInterval)
         setScore()
-        resetVariables()
-        alert('Você venceu')
+        windowContainer.style.display = 'flex'
 
        }, 800)
     }
@@ -161,12 +161,33 @@ const setScore = ()=>{
     localStorage.setItem('clicks', setClicks)
 }
 
-//reset
+//Reset
 
 const resetVariables = ()=>{
     count = countM = clicks = 0;
     countStr = countMStr = '';
+    countDiv.textContent = '00:00'
+    clicksDiv.textContent = '0'
 }
+
+//Try Again
+
+const btnTry = document.querySelector('.tryAgain')
+
+const tryAgain = ()=>{
+    const allCards = document.querySelectorAll('.card')
+    resetVariables()
+
+    allCards.forEach(card =>{
+        document.querySelector('.grid').removeChild(card)
+    })
+    
+    loadGame()
+    countdownInterval = setInterval(countdown, 1000)
+    windowContainer.style.display = 'none';
+}
+
+btnTry.addEventListener('click', tryAgain)
 
 loadGame()
 

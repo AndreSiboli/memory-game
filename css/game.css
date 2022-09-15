@@ -17,8 +17,7 @@ body{
     background-position: center center;
     background-repeat: no-repeat;
     background-size: cover;
-    padding: 0px 10px;
-    padding-bottom: 10px;
+    padding: 10px;
 }
 
 .grid {
@@ -71,9 +70,10 @@ body{
 
 /*Placar*/
 
-.pai{
+.gameName{
     font-family: var(--Nabla);
     font-size: 1.4em;
+    text-align: center;
 }
 
 .score-container{
@@ -105,12 +105,63 @@ body{
     font: 400 1em arial;
 }
 
-.countdown{
-    margin: 0;
+/*Window*/
+
+.window-container{
+    width: 100%;
+    height: 100vh;
+    position: absolute;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(128, 128, 128, 0.700);
+    padding: 10px;
+    z-index: 2;
+    top: 0;
+    left: 0;
 }
 
-.howMuchClicks{
-    margin: 0;
+.window{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 10px;
+    align-items: center;
+    background-color: #7DCEEC;
+    max-width: 500px;
+    width: 100%;
+    border-radius: 10px;
+    padding: 10px;
+}
+
+.congratulation p{
+    font-size: 1.2em;
+}
+
+.buttons .tryAgain{
+    font: 400 1.4em var(--Bitter);
+    background-color: crimson;
+    padding: 5px 20px;
+    height: 60px;
+    border-radius: 10px;
+}
+
+.buttons .tryAgain:hover{
+    background-color: rgba(220, 20, 60, 0.5);
+    transform: scale(1.05);
+}
+
+.informationMatch{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 25px;
+}
+
+.bestTry,
+.lastTry{
+    background-color: rgba(39, 8, 68, 0.089);
+    padding: 10px;
+    width: 100%;
 }
 
 @media (max-width: 450px){
@@ -118,4 +169,9 @@ body{
         grid-template-columns: repeat(4, 1fr);
         max-width: 420px;
     }
+
+    .buttons .tryAgain{
+        font-size: 1em;
+    }
+    
 }
