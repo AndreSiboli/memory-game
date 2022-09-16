@@ -41,7 +41,7 @@ const checkEndGame = () =>{
        setTimeout(()=>{
         clearInterval(countdownInterval)
         setScore()
-        windowContainer.style.display = 'flex'
+        openWindow()
 
        }, 800)
     }
@@ -153,12 +153,33 @@ const howMuchClicks = ()=>{
 //Set Score
 
 const setScore = ()=>{
-    let setPlayer = localStorage.getItem('player')
-    let setClicks = clicks
-    let setTime = `${countMStr}:${countStr}`
-    localStorage.setItem('PlayerName', setPlayer)
-    localStorage.setItem('time', setTime)
-    localStorage.setItem('clicks', setClicks)
+    let currentPlayer = localStorage.getItem('player')
+    let currentClicks = clicks
+    let currentTime = `${countMStr}:${countStr}`.split(':')
+
+    if(localStorage.getItem('time') == null){
+        let time = `${currentTime[0]}:${currentTime[1]}`
+        setLocal(currentPlayer, time, currentClicks)
+        return
+    }
+    
+    //Best Play
+    let bestPlay = localStorage.getItem('time').split(':')
+    let time = `${currentTime[0]}:${currentTime[1]}`
+
+    if(parseInt(currentTime[0]) < parseInt(bestPlay[0])){
+        setLocal(currentPlayer, time, currentClicks)
+    }else if(parseInt(currentTime[0]) == parseInt(bestPlay[0])){
+        if(parseInt(currentTime[1]) < parseInt(bestPlay[1])){
+            setLocal(currentPlayer, time, currentClicks)
+        }
+    }
+}
+
+const setLocal = (player, time, clicks)=>{
+    localStorage.setItem('PlayerName', player)
+    localStorage.setItem('time', time)
+    localStorage.setItem('clicks', clicks)
 }
 
 //Reset
@@ -168,6 +189,29 @@ const resetVariables = ()=>{
     countStr = countMStr = '';
     countDiv.textContent = '00:00'
     clicksDiv.textContent = '0'
+}
+
+//OpenWindow
+
+const openWindow = ()=>{
+    console.log('appear')
+    let bestTime = localStorage.getItem('time')
+    let bestClicks = localStorage.getItem('clicks')
+    let currentTime = `${countMStr}:${countStr}`
+    let currentClicks = clicks
+    let playerName = localStorage.getItem('PlayerName')
+
+    const bestPlay = document.querySelector('.bestTries').children
+    const lastPlay = document.querySelector('.lastTries').children
+
+    bestPlay[0].textContent = 'Player: ' + playerName
+    bestPlay[1].textContent = 'Tempo: ' + bestTime
+    bestPlay[2].textContent = 'Tentativas: ' + bestClicks
+    lastPlay[0].textContent = 'Player: ' + playerName
+    lastPlay[1].textContent = 'Tempo: ' + currentTime
+    lastPlay[2].textContent = 'Tentativas: ' + currentClicks
+
+    windowContainer.style.display = 'flex'
 }
 
 //Try Again
