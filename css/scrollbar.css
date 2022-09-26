@@ -1,24 +1,24 @@
 @charset "utf-8";
 
-body::-webkit-scrollbar{
+body::-webkit-scrollbar {
     width: 7px;
     background-color: transparent;
 }
 
-body::-webkit-scrollbar-track-piece{
+body::-webkit-scrollbar-track-piece {
     background-color: rgba(128, 128, 128);
 }
 
-body::-webkit-scrollbar-button{
+body::-webkit-scrollbar-button {
     background-color: white;
     height: 3px;
 }
 
-body::-webkit-scrollbar-thumb{
+body::-webkit-scrollbar-thumb {
     background-color: #fe81bc;
     border-radius: 2px;
 }
 
-body::-webkit-scrollbar-thumb:active{
+body::-webkit-scrollbar-thumb:active {
     background-color: #fe81bcAA;
 }
